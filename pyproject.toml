@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "RecruitmentTask"
+name = "RecruitementTask"
 version = "0.1.0"
 description = "Recruitment Task - backend Internship"
 authors = ["radzek15 <radzek15@wp.pl>"]
