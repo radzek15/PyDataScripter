@@ -161,3 +161,4 @@ cython_debug/
 
 # Dataset
 recruitement-task-backend-internship-main-data
+.ruff_cache

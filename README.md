@@ -15,7 +15,8 @@
    * Create Database: `python script.py create_database`
 
 ## Tech Stack:
-   * Python
+   * Python3
+   * pandas
    * Poetry
    * Pre-commit
 
