@@ -7,12 +7,14 @@
 <div align="justify">
 
    * Firstly clone the repo:
-     * `git clone https://github.com/radzek15/CeneoScraper`
+     * `git clone https://github.com/radzek15/Recruitement-task`
    * Initialize virtual environment and install dependencies:
      * `poetry install && poetry shell`
 
 ## Usage:
    * Create Database: `python script.py create_database`
+   * import any data you would like to database `python data_import.py`
+     * data will be validated before export according to task requirements but this process can be easily modified
 
 ## Tech Stack:
    * Python3
