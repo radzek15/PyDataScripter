@@ -35,13 +35,29 @@ class Database:
         try:
             c = conn.cursor()
             columns_str = ", ".join(columns)
-            c.execute(f"""INSERT INTO {table_name}({columns_str}) VALUES ({values})""")
+            c.execute(f"INSERT INTO {table_name}({columns_str}) VALUES ({values})")
             print("row inserted successfully")
         except sqlite3.Error as e:
             print(e)
         finally:
             if conn:
                 conn.commit()
+                conn.close()
+
+    def check_credentials(self, login, password):
+        conn = sqlite3.connect(self.db_name)
+        try:
+            c = conn.cursor()
+            c.execute(
+                "SELECT * FROM users1_csv WHERE (email = ? OR telephone_number = ?) AND password = ?",
+                (login, login, password),
+            )
+            credentials = c.fetchone()
+            return True if credentials else False
+        except sqlite3.Error as e:
+            print(e)
+        finally:
+            if conn:
                 conn.close()
 
     def __str__(self):
