@@ -12,6 +12,10 @@
      * `poetry install && poetry shell`
 
 ## Usage:
+   * For every command login and password is required:
+     - Login: Either email or telephone number
+     - Password: password
+     - `python script.py <command> --login <login> --password <password>`
    * Create Database: `python script.py create_database`
    * import any data you would like to database `python data_import.py`
      * data will be validated before export according to task requirements but this process can be easily modified
