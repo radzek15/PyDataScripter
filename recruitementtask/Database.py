@@ -1,11 +1,12 @@
 import sqlite3
+from typing import List, Union
 
 
 class Database:
     def __init__(self, db_name):
         self.db_name = db_name
 
-    def create_database(self):
+    def create_database(self) -> None:
         db = None
         try:
             db = sqlite3.connect(self.db_name)
@@ -16,7 +17,7 @@ class Database:
             if db:
                 db.close()
 
-    def create_table(self, table_name, columns):
+    def create_table(self, table_name: str, columns: List[Union[str, int]]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
@@ -30,7 +31,7 @@ class Database:
                 conn.commit()
                 conn.close()
 
-    def insert_row(self, table_name, columns, values):
+    def insert_row(self, table_name: str, columns: List[Union[str, int]], values: List[Union[str, int]]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
@@ -42,22 +43,6 @@ class Database:
         finally:
             if conn:
                 conn.commit()
-                conn.close()
-
-    def check_credentials(self, login, password):
-        conn = sqlite3.connect(self.db_name)
-        try:
-            c = conn.cursor()
-            c.execute(
-                "SELECT * FROM users1_csv WHERE (email = ? OR telephone_number = ?) AND password = ?",
-                (login, login, password),
-            )
-            credentials = c.fetchone()
-            return True if credentials else False
-        except sqlite3.Error as e:
-            print(e)
-        finally:
-            if conn:
                 conn.close()
 
     def __str__(self):
