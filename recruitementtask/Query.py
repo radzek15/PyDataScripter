@@ -1,4 +1,6 @@
+import json
 import sqlite3
+from typing import Union
 
 from .Database import Database
 
@@ -49,8 +51,38 @@ class Query(Database):
             if conn:
                 conn.close()
 
-    def get_childrens(self, table_name: str):
-        pass
+    def count_children_by_age(self, table_name: str) -> list[tuple[int, int]]:
+        conn = sqlite3.connect(self.db_name)
+        try:
+            c = conn.cursor()
+            c.execute(f"SELECT children FROM {table_name} WHERE LENGTH(children) > 2")
+            children = c.fetchall()
+            age_groups = {
+                j["age"]: age_groups.get(j["age"], 0) + 1
+                for i in range(len(children))
+                for j in json.loads(children[i][0])
+            }
+            return sorted(age_groups.items(), key=lambda x: x[0])
+        except sqlite3.Error as e:
+            print(e)
+            return []
+        finally:
+            if conn:
+                conn.close()
+
+    def get_children_by_user(self, table_name: str, password: str) -> list[dict[str, Union[str, int]]]:
+        conn = sqlite3.connect(self.db_name)
+        try:
+            c = conn.cursor()
+            c.execute(f"SELECT children FROM {table_name} WHERE password = ?", (password,))
+            children = c.fetchone()
+            return json.loads(children[0])
+        except sqlite3.Error as e:
+            print(e)
+            return []
+        finally:
+            if conn:
+                conn.close()
 
     def __str__(self):
         return f"Database {self.db_name} query"

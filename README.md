@@ -17,7 +17,11 @@
      - Password: password
      - `python script.py <command> --login <login> --password <password>`
    * Create Database: `python script.py create_database`
+     * Only command that does not need credentials
    * import any data you would like to database `python data_import.py`
+   * Print All Accounts: `python script.py print-all-accounts`
+   * Print Oldest Account: `python script.py print-oldest-account`
+   * Print Children: `python script.py print-children`
      * data will be validated before export according to task requirements but this process can be easily modified
 
 ## Tech Stack:

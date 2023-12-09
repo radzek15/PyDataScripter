@@ -1,9 +1,9 @@
 import sqlite3
-from typing import List, Union
+from typing import Union
 
 
 class Database:
-    def __init__(self, db_name):
+    def __init__(self, db_name: str):
         self.db_name = db_name
 
     def create_database(self) -> None:
@@ -17,7 +17,7 @@ class Database:
             if db:
                 db.close()
 
-    def create_table(self, table_name: str, columns: List[Union[str, int]]) -> None:
+    def create_table(self, table_name: str, columns: list[Union[str, int]]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
@@ -31,7 +31,7 @@ class Database:
                 conn.commit()
                 conn.close()
 
-    def insert_row(self, table_name: str, columns: List[Union[str, int]], values: List[Union[str, int]]) -> None:
+    def insert_row(self, table_name: str, columns: list[Union[str, int]], values: list[Union[str, int]]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
