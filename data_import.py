@@ -2,7 +2,7 @@ import sqlite3
 
 import pandas as pd
 
-from recruitementtask.DataTranformer import DataTransformer
+from recruitementtask.DataTransformer import DataTransformer
 from recruitementtask.EntryValidator import EntryValidator
 
 

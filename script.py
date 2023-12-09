@@ -8,11 +8,21 @@ TABLE = "users1_csv"
 
 db = Database(DATABASE)
 ap = argparse.ArgumentParser()
-query = Query(db.db_name)
+query = Query(db.db_name, TABLE)
 
 
 def main():
-    ap.add_argument("command", help="create SQLite database")
+    commands = {
+        "create_database": db.create_database(),
+        "print-all-accounts": lambda: print(query.get_all_accounts()),
+        "print-oldest-account": lambda: print(query.get_oldest_account()),
+        "print-children": lambda: [
+            print(f"{child['name']}, {child['age']}") for child in query.get_children_by_user(password)
+        ],
+        "group-by-age": lambda: [print(f"age:{k},\tcount:{v}") for k, v in query.count_children_by_age()],
+    }
+
+    ap.add_argument("command", choices=commands.keys(), help="\n".join([f"{cmd}:" for cmd in commands.keys()]))
     ap.add_argument("--login", help="email/phone number")
     ap.add_argument("--password", help="password")
 
@@ -21,18 +31,10 @@ def main():
     password = args.password
     command = args.command
 
-    commands = {
-        "print-all-accounts": lambda: print(query.get_all_accounts(TABLE)),
-        "print-oldest-account": lambda: print(query.get_oldest_account(TABLE)),
-        "print-children": lambda: [
-            print(f"{child['name']}, {child['age']}") for child in query.get_children_by_user(TABLE, password)
-        ],
-    }
-
     print(args)
     if command == "create_database":
         db.create_database()
-    elif query.check_credentials("users1_csv", login, password):
+    elif query.check_credentials(login, password):
         if command in commands:
             commands[command]()
         else:

@@ -25,10 +25,6 @@ line-length = 120
 ignore = [
     "E712",  # Allow using if x == False, as it's not always equivalent to if x.
     "E501",  # Supress line-too-long warnings: trust black's judgement on this one.
-    "A003",  # Allow shawoding class attribute: django uses id.
-    "B904",  # Allow unchained exceptions: it's fine to raise 404 in django.
-    "F401",  # Unused import
-    "F821",  # Undefined variable, recursion
 ]
 
 [tool.ruff.per-file-ignores]
