@@ -49,3 +49,6 @@
    * SQLite
    * Poetry
    * Pre-commit
+
+## Author:
+   * **Radomir Piątkowski**
