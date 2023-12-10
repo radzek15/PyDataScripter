@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/radzek15/Recruitement-task"></a>
-  <h1 align="center">Recruitement Task - backend Internship</h1>
+  <h1 align="center">Recruitment Task - backend Internship</h1>
   <p align="justify">Python script designed to execute various operations on the given datasets.</p></div>
 
 ## Features:
@@ -11,7 +11,7 @@
 | SQLite Database      | <p align="justify">The script facilitates various operations on a SQLite database, leveraging the sqlite3 library. It enables users to create, import data into, and perform other database operations using the powerful capabilities of SQLite.</p>                                                                           |
 | Data Export          | <p align="justify">Data export functionality is seamlessly integrated into the script, utilizing the Pandas library. This allows for easy reformatting and exporting of data, providing users with the flexibility to manipulate and export data in various formats as per their requirements.</p>                              |
 | OOP and PEP8         | <p align="justify">The script is developed following Object-Oriented Programming (OOP) principles, promoting modularity, reusability, and maintainability of code. Additionally, the script adheres to the PEP8 coding style guidelines, ensuring clean, readable, and consistent code that is in line with best practices.</p> |
-| Tests and validation | <p align="justify"></p>                                                                                                                                                                                                                                                                                                         |
+| Tests and validation | <p align="justify">The script is tested with pytest-based unit testing to ensure the reliability and robustness of the script's features, covering individual components and input validation.</p>                                                                                                                              |
 
 ## Installation:
 
@@ -42,6 +42,8 @@
      ![group-age.png](static%2Fgroup-age.png)
    * Find users with Children of the same age: `python script.py find-similar-children-by-age`
      ![find-similar.png](static%2Ffind-similar.png)
+   * Run tests: `pytest`
+     * Markers in pyproject.toml
 
 ## Tech Stack:
    * Python3
@@ -49,6 +51,7 @@
    * SQLite
    * Poetry
    * Pre-commit
+   * Pytest
 
 ## Author:
    * **Radomir Piątkowski**

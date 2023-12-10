@@ -8,7 +8,7 @@ class EntryValidator:
     @staticmethod
     def validate_email(df: pd.DataFrame) -> pd.DataFrame:
         pattern = r"^[^@]+@[^@]+\.[a-zA-Z0-9]{1,4}$"
-        return df[df["email"].str.contains(pattern)]
+        return df[df["email"].str.contains(pattern, na=False)]
 
     # For excluding rows from df when there is null value in specified column, so not only for phone like in the task
     # Works perfectly fine for entries with null phone, just specify 'telephone_number' as 2nd arg
