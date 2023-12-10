@@ -73,11 +73,13 @@ class Query(Database):
             if conn:
                 conn.close()
 
-    def get_children_by_user(self, password: str) -> list[dict[str, Union[str, int]]]:
+    def get_children_by_user(self, login: str) -> list[dict[str, Union[str, int]]]:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
-            c.execute(f"SELECT children FROM {self.table_name} WHERE password = ?", (password,))
+            c.execute(
+                f"SELECT children FROM {self.table_name} WHERE (email = ? OR telephone_number = ?)", (login, login)
+            )
             children = c.fetchone()
             return json.loads(children[0])
         except sqlite3.Error as e:
@@ -87,16 +89,33 @@ class Query(Database):
             if conn:
                 conn.close()
 
-    def get_similar_children_by_age(self):
+    def get_similar_children_by_age(self, login: str) -> set[str]:
+        user_children = self.get_children_by_user(login)
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
-            c.execute(f"SELECT firstname, telephone_number, children FROM {self.table_name}")
-            children = c.fetchall()
-            return json.loads(children[0])
+            c.execute("SELECT firstname, telephone_number, email, children FROM users1_csv WHERE LENGTH(children) > 2")
+            rows = c.fetchall()
+            rows = [[p, t, e, json.loads(i)] for p, t, e, i in rows]
+
+            # Finding matching rows excluding the user
+            data = [
+                [p, t, c]
+                for i in user_children
+                for p, t, e, c in rows
+                for j in c
+                if i["age"] == j["age"] and t != login and e != login
+            ]
+
+            # Change elements types with f-string to exclude repetition using set
+            formatted_data = {
+                f"{item[0]} , {item[1]}: " + "; ".join([f"{child['name']}, {child['age']}" for child in item[2]])
+                for item in data
+            }
+            return formatted_data
         except sqlite3.Error as e:
             print(e)
-            return []
+            return set()
         finally:
             if conn:
                 conn.close()

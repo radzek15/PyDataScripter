@@ -13,13 +13,15 @@ query = Query(db.db_name, TABLE)
 
 def main():
     commands = {
-        "create_database": db.create_database(),
+        "create_database": db.create_database,
+        "import-data": db.import_data,
         "print-all-accounts": lambda: print(query.get_all_accounts()),
         "print-oldest-account": lambda: print(query.get_oldest_account()),
         "print-children": lambda: [
-            print(f"{child['name']}, {child['age']}") for child in query.get_children_by_user(password)
+            print(f"{child['name']}, {child['age']}") for child in query.get_children_by_user(login)
         ],
         "group-by-age": lambda: [print(f"age:{k},\tcount:{v}") for k, v in query.count_children_by_age()],
+        "find-similar-children-by-age": lambda: [print(i) for i in query.get_similar_children_by_age(login)],
     }
 
     ap.add_argument("command", choices=commands.keys(), help="\n".join([f"{cmd}:" for cmd in commands.keys()]))
@@ -31,9 +33,8 @@ def main():
     password = args.password
     command = args.command
 
-    print(args)
-    if command == "create_database":
-        db.create_database()
+    if command in ["create_database", "import-data"]:
+        commands[command]()
     elif query.check_credentials(login, password):
         if command in commands:
             commands[command]()
