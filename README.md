@@ -14,7 +14,7 @@
 | Tests and validation | <p align="justify"></p>                                                                                                                                                                                                                                                                                                         |
 
 ## Installation:
-<div align="justify">
+
 
    * Firstly clone the repo:
      * `git clone https://github.com/radzek15/Recruitement-task`
@@ -49,5 +49,3 @@
    * SQLite
    * Poetry
    * Pre-commit
-
-</div>
