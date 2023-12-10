@@ -48,7 +48,7 @@ def sample_dataframe():
 def test_validate_email(sample_dataframe):
     result = EntryValidator.validate_email(sample_dataframe[["email"]])
     expected = pd.DataFrame({"email": ["test@test.com", "test@test.com", "test1@test.com"]})
-    assert result.equals(expected)
+    pd.testing.assert_frame_equal(result, expected)
 
 
 @pytest.mark.EntryValidator
