@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from recruitementtask.EntryValidator import EntryValidator as EtVl
+from recruitementtask.EntryValidator import EntryValidator
 
 
 @pytest.fixture
@@ -46,14 +46,14 @@ def sample_dataframe():
 
 @pytest.mark.EntryValidator
 def test_validate_email(sample_dataframe):
-    result = EtVl.validate_email(sample_dataframe[["email"]])
+    result = EntryValidator.validate_email(sample_dataframe[["email"]])
     expected = pd.DataFrame({"email": ["test@test.com", "test@test.com", "test1@test.com"]})
     assert result.equals(expected)
 
 
 @pytest.mark.EntryValidator
 def test_exclude_null(sample_dataframe):
-    result = EtVl.exclude_null(sample_dataframe[["email"]], "email")
+    result = EntryValidator.exclude_null(sample_dataframe[["email"]], "email")
     expected = pd.DataFrame(
         {
             "email": [
@@ -73,8 +73,8 @@ def test_exclude_null(sample_dataframe):
 
 @pytest.mark.EntryValidator
 def test_standardize_phone_number(sample_dataframe):
-    result = EtVl.standardize_phone_number(
-        EtVl.exclude_null(sample_dataframe[["telephone_number"]], "telephone_number")
+    result = EntryValidator.standardize_phone_number(
+        EntryValidator.exclude_null(sample_dataframe[["telephone_number"]], "telephone_number")
     )
     expected = pd.DataFrame(
         {
@@ -95,7 +95,7 @@ def test_standardize_phone_number(sample_dataframe):
 
 @pytest.mark.EntryValidator
 def test_remove_duplicates(sample_dataframe):
-    result = EtVl.remove_duplicates(EtVl.validate_email(sample_dataframe), "email")
+    result = EntryValidator.remove_duplicates(EntryValidator.validate_email(sample_dataframe), "email")
     expected = pd.DataFrame(
         {
             "email": ["test@test.com", "test1@test.com"],
