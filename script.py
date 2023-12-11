@@ -21,7 +21,7 @@ def main() -> None:
             print(f"{child['name']}, {child['age']}") for child in query.get_children_by_user(login)
         ],
         "group-by-age": lambda: [print(f"age:{k},\tcount:{v}") for k, v in query.count_children_by_age()],
-        "find-similar-children-by-age": lambda: [print(i) for i in query.get_similar_children_by_age(login)],
+        "find-similar-children-by-age": lambda: [print(i) for i in query.get_similar_children_by_age(login, TABLE)],
     }
 
     ap.add_argument("command", choices=commands.keys(), help="\n".join([f"{cmd}:" for cmd in commands.keys()]))

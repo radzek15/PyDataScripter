@@ -89,12 +89,14 @@ class Query(Database):
             if conn:
                 conn.close()
 
-    def get_similar_children_by_age(self, login: str) -> set[str]:
+    def get_similar_children_by_age(self, login: str, table_name) -> set[str]:
         user_children = self.get_children_by_user(login)
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
-            c.execute("SELECT firstname, telephone_number, email, children FROM users1_csv WHERE LENGTH(children) > 2")
+            c.execute(
+                f"SELECT firstname, telephone_number, email, children FROM {table_name} WHERE LENGTH(children) > 2"
+            )
             rows = c.fetchall()
             rows = [[p, t, e, json.loads(i)] for p, t, e, i in rows]
 
