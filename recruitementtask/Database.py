@@ -1,5 +1,5 @@
 import sqlite3
-from typing import Union
+from typing import Iterable
 
 import pandas as pd
 
@@ -22,7 +22,7 @@ class Database:
             if db:
                 db.close()
 
-    def create_table(self, table_name: str, columns: list[Union[str, int]]) -> None:
+    def create_table(self, table_name: str, columns: Iterable[str]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
@@ -36,7 +36,7 @@ class Database:
                 conn.commit()
                 conn.close()
 
-    def insert_row(self, table_name: str, columns: list[Union[str, int]], values: list[Union[str, int]]) -> None:
+    def insert_row(self, table_name: str, columns: Iterable[str], values: Iterable[str]) -> None:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
@@ -51,7 +51,7 @@ class Database:
                 conn.close()
 
     @staticmethod
-    def import_data():
+    def import_data() -> None:
         df1_csv = pd.read_csv("recruitement-task-backend-internship-main-data/data/a/b/users_1.csv", sep=";")
         df2_csv = pd.read_csv("recruitement-task-backend-internship-main-data/data/a/c/users_2.csv", sep=";")
         df_json = pd.read_json("recruitement-task-backend-internship-main-data/data/a/users.json")
@@ -122,5 +122,5 @@ class Database:
                 conn.commit()
                 conn.close()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.db_name

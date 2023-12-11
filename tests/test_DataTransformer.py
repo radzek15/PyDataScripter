@@ -7,13 +7,13 @@ from recruitementtask.DataTransformer import DataTransformer
 
 
 @pytest.fixture
-def sample_dataframe():
+def sample_dataframe() -> pd.DataFrame:
     data = {"children": ["Alice (5), Bob (8)", "Danielle (5), Justin (16)", "Josh (8)"]}
     return pd.DataFrame(data)
 
 
 @pytest.mark.DataTransformer
-def test_transform_children_csv(sample_dataframe):
+def test_transform_children_csv(sample_dataframe: pd.DataFrame):
     result = DataTransformer.transform_children_csv(sample_dataframe)
     expected = pd.DataFrame(
         {
@@ -28,13 +28,13 @@ def test_transform_children_csv(sample_dataframe):
 
 
 @pytest.mark.DataTransformer
-def test_json_serializer(sample_dataframe):
+def test_json_serializer(sample_dataframe: pd.DataFrame):
     result = DataTransformer.json_serializer(DataTransformer.transform_children_csv(sample_dataframe))
     assert result["children"].apply(lambda x: isinstance(x, str)).all()
 
 
 @pytest.mark.DataTransformer
-def test_transform_xml_to_json():
+def test_transform_xml_to_json() -> None:
     # Create a sample XML file for testing
     xml_content = """
     <users>

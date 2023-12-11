@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from typing import Union
+from typing import Any, Union
 
 from .Database import Database
 
@@ -27,7 +27,7 @@ class Query(Database):
             if conn:
                 conn.close()
 
-    def get_all_accounts(self) -> int:
+    def get_all_accounts(self) -> Any:
         conn = sqlite3.connect(self.db_name)
         try:
             c = conn.cursor()
