@@ -4,7 +4,7 @@ from recruitementtask.Database import Database
 from recruitementtask.Query import Query
 
 DATABASE = "my_sqlite.db"
-TABLE = "users_json"
+TABLE = "users"
 
 db = Database(DATABASE)
 ap = argparse.ArgumentParser()
@@ -12,9 +12,6 @@ query = Query(db.db_name, TABLE)
 
 
 def main() -> None:
-    args = ap.parse_args()
-    login = args.login
-    password = args.password
     commands = {
         "create_database": db.create_database,
         "import-data": db.import_data,
@@ -31,6 +28,9 @@ def main() -> None:
     ap.add_argument("--login", help="email/phone number")
     ap.add_argument("--password", help="password")
 
+    args = ap.parse_args()
+    login = args.login
+    password = args.password
     command = args.command
 
     if command in ["create_database", "import-data"]:
