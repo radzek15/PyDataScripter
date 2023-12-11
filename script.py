@@ -4,7 +4,7 @@ from recruitementtask.Database import Database
 from recruitementtask.Query import Query
 
 DATABASE = "my_sqlite.db"
-TABLE = "users1_csv"
+TABLE = "users_json"
 
 db = Database(DATABASE)
 ap = argparse.ArgumentParser()
