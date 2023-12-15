@@ -3,10 +3,11 @@ import argparse
 from database.Database import Database
 from database.Query import Query
 
-DATABASE = "my_sqlite.db"
+DB_PATH = "test-data/data/"
+DB_NAME = "my_sqlite.db"
 TABLE = "users"
 
-db = Database(DATABASE)
+db = Database(DB_PATH, DB_NAME)
 ap = argparse.ArgumentParser()
 query = Query(db.db_name, TABLE)
 

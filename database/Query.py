@@ -7,7 +7,7 @@ from .Database import Database
 
 class Query(Database):
     def __init__(self, db_name: str, table_name: str):
-        super().__init__(db_name)
+        super().__init__(db_path="", db_name=db_name)
         self.table_name = table_name
 
     def check_credentials(self, login: str, password: str) -> bool:
