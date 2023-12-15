@@ -1,6 +1,6 @@
 import pytest
 
-from recruitementtask.Query import Query
+from database.Query import Query
 
 
 @pytest.fixture

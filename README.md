@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/radzek15/Recruitement-task"></a>
-  <h1 align="center">Recruitment Task - backend Internship</h1>
+  <h1 align="center">PyDataScripter</h1>
   <p align="justify">Python script designed to execute various operations on the given datasets.</p></div>
 
 ## Features:

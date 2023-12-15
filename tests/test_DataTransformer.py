@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pytest
 
-from recruitementtask.DataTransformer import DataTransformer
+from database.DataTransformer import DataTransformer
 
 
 @pytest.fixture

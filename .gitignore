@@ -162,3 +162,4 @@ cython_debug/
 # project files
 .ruff_cache
 test.ipynb
+my_sqlite.db

@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from recruitementtask.EntryValidator import EntryValidator
+from database.EntryValidator import EntryValidator
 
 
 @pytest.fixture

@@ -3,12 +3,13 @@ from typing import Iterable
 
 import pandas as pd
 
-from recruitementtask.DataTransformer import DataTransformer
-from recruitementtask.EntryValidator import EntryValidator
+from database.DataTransformer import DataTransformer
+from database.EntryValidator import EntryValidator
 
 
 class Database:
-    def __init__(self, db_name: str):
+    def __init__(self, db_path: str, db_name: str):
+        self.db_path = db_path
         self.db_name = db_name
 
     def create_database(self) -> None:
@@ -50,17 +51,12 @@ class Database:
                 conn.commit()
                 conn.close()
 
-    @staticmethod
-    def import_data() -> None:
-        df1_csv = pd.read_csv("recruitement-task-backend-internship-main-data/data/a/b/users_1.csv", sep=";")
-        df2_csv = pd.read_csv("recruitement-task-backend-internship-main-data/data/a/c/users_2.csv", sep=";")
-        df_json = pd.read_json("recruitement-task-backend-internship-main-data/data/a/users.json")
-        df1_xml = DataTransformer.transform_xml_to_json(
-            "recruitement-task-backend-internship-main-data/data/a/b/users_1.xml"
-        )
-        df2_xml = DataTransformer.transform_xml_to_json(
-            "recruitement-task-backend-internship-main-data/data/users_2.xml"
-        )
+    def import_data(self) -> None:
+        df1_csv = pd.read_csv(f"{self.db_path}a/b/users_1.csv", sep=";")
+        df2_csv = pd.read_csv(f"{self.db_path}a/c/users_2.csv", sep=";")
+        df_json = pd.read_json(f"{self.db_path}a/users.json")
+        df1_xml = DataTransformer.transform_xml_to_json(f"{self.db_path}a/b/users_1.xml")
+        df2_xml = DataTransformer.transform_xml_to_json(f"{self.db_path}users_2.xml")
 
         # Transform children column to json format
         df1_csv = DataTransformer.transform_children_csv(df1_csv)

@@ -1,7 +1,7 @@
 import argparse
 
-from recruitementtask.Database import Database
-from recruitementtask.Query import Query
+from database.Database import Database
+from database.Query import Query
 
 DATABASE = "my_sqlite.db"
 TABLE = "users"
