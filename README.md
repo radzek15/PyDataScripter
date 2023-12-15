@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/radzek15/Recruitement-task"></a>
+  <a href="https://github.com/radzek15/PyDataScripter"></a>
   <h1 align="center">PyDataScripter</h1>
   <p align="justify">Python script designed to execute various operations on the given datasets.</p></div>
 
@@ -15,9 +15,8 @@
 
 ## Installation:
 
-
    * Firstly clone the repo:
-     * `git clone https://github.com/radzek15/Recruitement-task`
+     * `git clone https://github.com/radzek15/PyDataScripter`
    * Initialize virtual environment and install dependencies:
      * `poetry install && poetry shell`
 
@@ -53,5 +52,5 @@
    * Pre-commit
    * Pytest
 
-## Author:
-   * **Radomir Piątkowski**
+## LICENSE:
+PyDataScript is licensed under the MIT. Feel free to use, modify, and distribute the code as per the terms of the license.
