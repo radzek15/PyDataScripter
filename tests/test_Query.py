@@ -6,7 +6,9 @@ from database.Query import Query
 
 @pytest.fixture
 def sample_query():
-    db = Database("../test-data/data/", "my_sqlite.db")
+    db = Database("test-data/data/", "my_sqlite.db")
+    db.create_database()
+    db.import_data()
     return Query(db.db_name, "users")
 
 
