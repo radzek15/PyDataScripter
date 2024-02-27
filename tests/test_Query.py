@@ -1,11 +1,13 @@
 import pytest
 
+from database.Database import Database
 from database.Query import Query
 
 
 @pytest.fixture
 def sample_query():
-    return Query("my_sqlite.db", "users")
+    db = Database("../test-data/data/", "my_sqlite.db")
+    return Query(db.db_name, "users")
 
 
 @pytest.mark.Query
